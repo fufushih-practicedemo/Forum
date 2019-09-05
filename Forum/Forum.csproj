@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -141,6 +142,9 @@
     <Compile Include="Models\Data\Db.cs" />
     <Compile Include="Models\Data\MemberDTO.cs" />
     <Compile Include="Models\Data\MessageDTO.cs" />
+    <Compile Include="Models\ViewModel\Member\MemberLoginVM.cs" />
+    <Compile Include="Models\ViewModel\Member\MemberProfileVM.cs" />
+    <Compile Include="Models\ViewModel\Member\MemberVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +187,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Member\Register.cshtml" />
+    <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Views\Member\MemberProfile.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
