@@ -53,6 +53,18 @@ namespace Forum.Controllers
 
                 db.Members.Add(memberDTO);
                 db.SaveChanges();
+
+                // Add User Role
+                int id = memberDTO.UID;
+
+                UserRoleDTO userRoleDTO = new UserRoleDTO()
+                {
+                    UserId = id,
+                    RoleId = 2
+                };
+
+                db.UserRoles.Add(userRoleDTO);
+                db.SaveChanges();
             }
 
             return Redirect("~/member/login");
@@ -162,6 +174,24 @@ namespace Forum.Controllers
             }
 
             return Redirect("~/member/MemberProfile");
+        }
+
+        // Nav Partial
+        public ActionResult MemberNavPartial()
+        {
+            string account = User.Identity.Name;
+            MemberNavPartialVM model;
+
+            using(Db db = new Db()) {
+                MemberDTO dto = db.Members.FirstOrDefault(x => x.Account == account);
+
+                model = new MemberNavPartialVM()
+                {
+                    Name = dto.Name
+                };
+            }
+
+            return PartialView(model);
         }
     }
 }

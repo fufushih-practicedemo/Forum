@@ -12,5 +12,8 @@ namespace Forum.Models.Data
         public DbSet<ArticleDTO> Articles { get; set; }
         public DbSet<MessageDTO> Messages { get; set; }
         public DbSet<AlbumDTO> Albums { get; set; }
+
+        public DbSet<RoleDTO> Roles { get; set; }
+        public DbSet<UserRoleDTO> UserRoles { get; set; }
     }
 }

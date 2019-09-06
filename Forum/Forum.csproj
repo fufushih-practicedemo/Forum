@@ -142,7 +142,10 @@
     <Compile Include="Models\Data\Db.cs" />
     <Compile Include="Models\Data\MemberDTO.cs" />
     <Compile Include="Models\Data\MessageDTO.cs" />
+    <Compile Include="Models\Data\RoleDTO.cs" />
+    <Compile Include="Models\Data\UserRoleDTO.cs" />
     <Compile Include="Models\ViewModel\Member\MemberLoginVM.cs" />
+    <Compile Include="Models\ViewModel\Member\MemberNavPartialVM.cs" />
     <Compile Include="Models\ViewModel\Member\MemberProfileVM.cs" />
     <Compile Include="Models\ViewModel\Member\MemberVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -190,6 +193,7 @@
     <Content Include="Views\Member\Register.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\MemberProfile.cshtml" />
+    <Content Include="Views\Member\MemberNavPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
