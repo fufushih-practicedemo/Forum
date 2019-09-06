@@ -13,13 +13,13 @@ namespace Forum.Models.Data
         [Key]
         public int MessageId { get; set; }
         public int ArticleId { get; set; }
-        public string Account { get; set; }
+        public int UID { get; set; }
         public string Content { get; set; }
         public DateTime CreateTime { get; set; }
 
         [ForeignKey("ArticleId")]
         public virtual ArticleDTO Article { get; set; }
-        [ForeignKey("Account")]
+        [ForeignKey("UID")]
         public virtual MemberDTO Member { get; set; }
     }
 }

@@ -16,10 +16,10 @@ namespace Forum.Models.Data
         public string Url { get; set; }
         public int Size { get; set; }
         public string Type { get; set; }
-        public string Account { get; set; } // tblAccount
+        public int UID { get; set; } // tblAccount
         public DateTime CreateTime { get; set; }
 
-        [ForeignKey("Account")]
+        [ForeignKey("UID")]
         public virtual MemberDTO Member { get; set; }
     }
 }

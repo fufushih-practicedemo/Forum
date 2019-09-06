@@ -18,7 +18,7 @@ namespace Forum.Controllers
         }
 
         // GET: Member/register
-        public ActionResult Register(MemberVM model)
+        public ActionResult Register()
         {
             return View("register");
         }
@@ -36,8 +36,8 @@ namespace Forum.Controllers
                 return View("register", model);
             }
 
-            using(Db db = new Db()) {
-                if(db.Members.Any(x => x.Account.Equals(model.Account))) {
+            using (Db db = new Db()) {
+                if (db.Members.Any(x => x.Account.Equals(model.Account))) {
                     ModelState.AddModelError("", "Account" + model.Account + "is taken!");
                     model.Account = "";
                     return View("register", model);
@@ -48,8 +48,7 @@ namespace Forum.Controllers
                     Name = model.Name,
                     Email = model.Email,
                     Account = model.Account,
-                    Password = model.Password,
-                    IsAdmin = false
+                    Password = model.Password
                 };
 
                 db.Members.Add(memberDTO);
@@ -66,7 +65,7 @@ namespace Forum.Controllers
             string account = User.Identity.Name;
 
             if (!string.IsNullOrEmpty(account)) {
-                return RedirectToAction("Profile");
+                return RedirectToAction("member-profile");
             }
 
             return View();
@@ -82,8 +81,8 @@ namespace Forum.Controllers
 
             bool isValid = false;
 
-            using(Db db = new Db()) {
-                if(db.Members.Any(x => x.Account.Equals(model.Account) && x.Password.Equals(model.Password)){
+            using (Db db = new Db()) {
+                if (db.Members.Any(x => x.Account.Equals(model.UserName) && x.Password.Equals(model.Password))) {
                     isValid = true;
                 }
 
@@ -104,51 +103,53 @@ namespace Forum.Controllers
             return Redirect("~/Member/Login");
         }
 
-        // GET: /Member/profile
-        [ActionName("profile")]
+        // GET: /Member/member-profile
+        [ActionName("member-profile")]
+        [HttpGet]
         public ActionResult MemberProfile()
         {
             string Account = User.Identity.Name;
 
             MemberProfileVM model;
 
-            using(Db db = new Db()) {
+            using (Db db = new Db()) {
                 // get user
                 MemberDTO dto = db.Members.FirstOrDefault(x => x.Account == Account);
 
                 model = new MemberProfileVM(dto);
             }
 
-            return View("profile", model);
+            return View("MemberProfile", model);
         }
 
-        // POST: /Member/profile
+        // POST: /Member/member-profile
         [HttpPost]
+        [ActionName("member-profile")]
         public ActionResult MemberProfile(MemberProfileVM model)
         {
             if (!ModelState.IsValid) {
-                return View("profile", model);
+                return View("MemberProfile", model);
             }
 
-            if (!string.IsNullOrWhiteSpace(model.Password) {
+            if (!string.IsNullOrWhiteSpace(model.Password)) {
                 if (!model.Password.Equals(model.ConfirmPassword)) {
                     ModelState.AddModelError("", "密碼不符");
-                    return View("profile", model);
+                    return View("MemberProfile", model);
                 }
             }
 
-            using(Db db = new Db()) {
+            using (Db db = new Db()) {
                 string account = User.Identity.Name;
 
                 // Check account is unique
-                if(db.Members.Any(x => x.Account == account)) {
+                if (db.Members.Where(x => x.UID != model.UID).Any(x => x.Account == account)) {
                     ModelState.AddModelError("", "帳號 " + model.Account + " 已存在!");
                     model.Account = "";
-                    return View("profile", model);
+                    return View("MemberProfile", model);
                 }
 
                 // Edit
-                MemberDTO dto = db.Members.Find(model.Account);
+                MemberDTO dto = db.Members.Find(model.UID);
 
                 dto.Name = model.Name;
                 dto.Email = model.Email;
@@ -160,6 +161,7 @@ namespace Forum.Controllers
                 db.SaveChanges();
             }
 
-            return Redirect("~/member/profile");
+            return Redirect("~/member/MemberProfile");
         }
+    }
 }

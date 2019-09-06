@@ -15,21 +15,21 @@ namespace Forum.Models.ViewModel.Member
         }
         public MemberVM(MemberDTO row)
         {
+            UID = row.UID;
             Account = row.Account;
             Password = row.Password;
             Name = row.Name;
             Email = row.Email;
-            IsAdmin = row.IsAdmin;
         }
 
-        
+        public int UID { get; set; }
+        [Required]
         public string Account { get; set; }
         [Required]
         public string Password { get; set; }
         [Required]
         public string Name { get; set; }
         public string Email { get; set; }
-        public bool IsAdmin { get; set; }
 
         [Required]
         public string ConfirmPassword { get; set; }

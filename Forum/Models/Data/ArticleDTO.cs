@@ -14,11 +14,11 @@ namespace Forum.Models.Data
         public int ArticleId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public string Account { get; set; }
+        public int UID { get; set; }
         public DateTime CreateTime { get; set; }
         public int Watch { get; set; }
 
-        [ForeignKey("Account")]
+        [ForeignKey("UID")]
         public virtual MemberDTO Member { get; set; }
     }
 }
