@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Forum.Models.ViewModel.Article.ArticleVM>
+﻿@model IEnumerable<Forum.Models.ViewModel.Article.ArticleListVM>
 
 @{
     ViewBag.Title = "Posts";
@@ -12,22 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ArticleId)
+            Title
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Author
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Content)
+            CreateTime
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Watch)
+            Watch
         </th>
         <th></th>
     </tr>
@@ -35,26 +29,21 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ArticleId)
+            <a href="/Article/Post?id=@item.ArticleId">
+                @item.Title
+            </a>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @item.Author
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Content)
+            @item.CreateTime
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UID)
+            @item.Watch
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Watch)
-        </td>
-
-        <td>
-            @Html.ActionLink("刪除", "DeletePost", new { id = item.ArticleId}, new { @class = "btn btn-default" })
+           @Html.ActionLink("刪除", "DeletePost", new { id = item.ArticleId }, new { @class = "btn btn-default" })
         </td>
     </tr>
 }

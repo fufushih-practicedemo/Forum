@@ -1,0 +1,66 @@
+﻿@model Forum.Models.ViewModel.Article.ArticleVM
+
+@{
+    ViewBag.Title = "Post";
+}
+
+<h2>Post</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArticleId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArticleId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Watch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Watch)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Posts")
+</p>

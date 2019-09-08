@@ -154,6 +154,7 @@
     <Compile Include="Models\Data\MessageDTO.cs" />
     <Compile Include="Models\Data\RoleDTO.cs" />
     <Compile Include="Models\Data\UserRoleDTO.cs" />
+    <Compile Include="Models\ViewModel\Article\ArticleListVM.cs" />
     <Compile Include="Models\ViewModel\Article\ArticleVM.cs" />
     <Compile Include="Models\ViewModel\Member\MemberLoginVM.cs" />
     <Compile Include="Models\ViewModel\Member\MemberNavPartialVM.cs" />
@@ -199,16 +200,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Member\Register.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\MemberProfile.cshtml" />
     <Content Include="Views\Member\MemberNavPartial.cshtml" />
     <Content Include="Views\Article\AddPosts.cshtml" />
-    <Content Include="Views\Article\Posts.cshtml" />
     <Content Include="Views\Article\EditPost.cshtml" />
+    <Content Include="Views\Article\Posts.cshtml" />
+    <Content Include="Views\Article\Post.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

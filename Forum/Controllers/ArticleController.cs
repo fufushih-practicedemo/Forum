@@ -12,19 +12,34 @@ namespace Forum.Controllers
     public class ArticleController : Controller
     {
         // GET: Article/Posts
-        public ActionResult Posts(int? page, int? articleId)
+        public ActionResult Posts(int? page)
         {
-            List<ArticleVM> articleList;
+            List<ArticleVM> article;
+            List<ArticleListVM> articleList = new List<ArticleListVM>();
 
             var pageNum = page ?? 1;
 
             using(Db db = new Db()) {
-                articleList = db.Articles.ToArray().Where(x => articleId == null || articleId == 0 || x.ArticleId == articleId)
+                article = db.Articles.ToArray()
                     .Select(x => new ArticleVM(x)).ToList();
+
+                foreach(var post in article) {
+
+                    MemberDTO member = db.Members.Where(x => x.UID == post.UID).FirstOrDefault();
+
+                    articleList.Add(new ArticleListVM()
+                    {
+                        ArticleId = post.ArticleId,
+                        Title = post.Title,
+                        Author = member.Account,
+                        CreateTime = post.CreateTime,
+                        Watch = post.Watch
+                    });
+                }
             }
 
-            var onePageOfDefault = articleList.ToPagedList(pageNum, 10);
-
+            var onePageOfPost = articleList.ToPagedList(pageNum, 10);
+            ViewBag.OnePageOfPost = onePageOfPost;
 
             return View(articleList);
         }
@@ -121,6 +136,24 @@ namespace Forum.Controllers
             }
 
             return RedirectToAction("Posts");
+        }
+
+        // GET: Article/Post/id
+        public ActionResult Post(int id)
+        {
+            ArticleVM model;
+
+            using(Db db = new Db()) {
+                ArticleDTO dto = db.Articles.Find(id);
+
+                if(dto == null) {
+                    return Content("Post isn't exist");
+                }
+
+                model = new ArticleVM(dto);
+            }
+
+            return View("Post", model);
         }
     }
 }
