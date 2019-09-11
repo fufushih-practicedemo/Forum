@@ -160,6 +160,7 @@
     <Compile Include="Models\ViewModel\Member\MemberNavPartialVM.cs" />
     <Compile Include="Models\ViewModel\Member\MemberProfileVM.cs" />
     <Compile Include="Models\ViewModel\Member\MemberVM.cs" />
+    <Compile Include="Models\ViewModel\Message\MessageVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +210,7 @@
     <Content Include="Views\Article\EditPost.cshtml" />
     <Content Include="Views\Article\Posts.cshtml" />
     <Content Include="Views\Article\Post.cshtml" />
+    <Content Include="Views\Article\CommentList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

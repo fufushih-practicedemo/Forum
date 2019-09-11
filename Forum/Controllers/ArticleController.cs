@@ -1,5 +1,6 @@
 ﻿using Forum.Models.Data;
 using Forum.Models.ViewModel.Article;
+using Forum.Models.ViewModel.Message;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -155,5 +156,45 @@ namespace Forum.Controllers
 
             return View("Post", model);
         }
+
+        
+
+        // GET: Article/CommentList
+        [Authorize]
+        public ActionResult CommentList(int id)
+        {
+            List<MessageVM> messageList = new List<MessageVM>();
+            using (Db db = new Db()) {
+                messageList = db.Messages.ToArray().Select(x => new MessageVM(x)).Where(x => x.ArticleId == id).ToList();
+            }
+            return PartialView(messageList);
+        }
+
+        // POST: Article/AddComment
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddComment(int id, string Content)
+        {
+            string username = User.Identity.Name;
+
+            using (Db db = new Db()) {
+                MessageDTO dto = new MessageDTO();
+
+                var q = db.Members.FirstOrDefault(x => x.Account == username);
+                int userid = q.UID;
+
+                dto.ArticleId = id;
+                dto.UID = userid;
+                dto.Content = Content;
+                dto.CreateTime = DateTime.Now;
+
+                db.Messages.Add(dto);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Post", new { id = id });
+        }
+
+
     }
 }
