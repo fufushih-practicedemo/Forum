@@ -154,6 +154,7 @@
     <Compile Include="Models\Data\MessageDTO.cs" />
     <Compile Include="Models\Data\RoleDTO.cs" />
     <Compile Include="Models\Data\UserRoleDTO.cs" />
+    <Compile Include="Models\Features\MemberFeatures.cs" />
     <Compile Include="Models\ViewModel\Article\ArticleListVM.cs" />
     <Compile Include="Models\ViewModel\Article\ArticleVM.cs" />
     <Compile Include="Models\ViewModel\Member\MemberLoginVM.cs" />

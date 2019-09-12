@@ -1,4 +1,5 @@
 ﻿using Forum.Models.Data;
+using Forum.Models.Features;
 using Forum.Models.ViewModel.Member;
 using System;
 using System.Collections.Generic;
@@ -43,12 +44,16 @@ namespace Forum.Controllers
                     return View("register", model);
                 }
 
+                MemberFeatures passwordHash = new MemberFeatures();
+
+                string hashPassword = passwordHash.HashPassword(model.Password);
+
                 MemberDTO memberDTO = new MemberDTO()
                 {
                     Name = model.Name,
                     Email = model.Email,
                     Account = model.Account,
-                    Password = model.Password
+                    Password = hashPassword
                 };
 
                 db.Members.Add(memberDTO);
@@ -94,7 +99,11 @@ namespace Forum.Controllers
             bool isValid = false;
 
             using (Db db = new Db()) {
-                if (db.Members.Any(x => x.Account.Equals(model.UserName) && x.Password.Equals(model.Password))) {
+
+                MemberFeatures passwordHash = new MemberFeatures();
+                string hashPassword = passwordHash.HashPassword(model.Password);
+
+                if (db.Members.Any(x => x.Account.Equals(model.UserName) && x.Password.Equals(hashPassword))) {
                     isValid = true;
                 }
 
@@ -163,11 +172,14 @@ namespace Forum.Controllers
                 // Edit
                 MemberDTO dto = db.Members.Find(model.UID);
 
+                MemberFeatures passwordHash = new MemberFeatures();
+                string hashPassword = passwordHash.HashPassword(model.Password);
+
                 dto.Name = model.Name;
                 dto.Email = model.Email;
                 dto.Account = model.Account;
                 if (!string.IsNullOrWhiteSpace(model.Password)) {
-                    dto.Password = model.Password;
+                    dto.Password = hashPassword;
                 }
 
                 db.SaveChanges();

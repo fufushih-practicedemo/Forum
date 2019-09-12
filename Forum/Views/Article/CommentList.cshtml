@@ -3,7 +3,7 @@
 <div>
 @foreach (var item in Model) {
     <dl>
-        <dt>UID : @Html.DisplayFor(modelItem => item.UID) 說: </dt>
+        <dt>UID  @Html.DisplayFor(modelItem => item.UID) 說: </dt>
 
         <dd>
             @Html.DisplayFor(modelItem => item.Content)
