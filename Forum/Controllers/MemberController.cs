@@ -45,7 +45,6 @@ namespace Forum.Controllers
                 }
 
                 MemberFeatures passwordHash = new MemberFeatures();
-
                 string hashPassword = passwordHash.HashPassword(model.Password);
 
                 MemberDTO memberDTO = new MemberDTO()

@@ -2,35 +2,43 @@
     ViewBag.Title = "Home Page";
 }
 
-<div>
-    <h1>Demo of Forum</h1>
+<div class="jumbotron jumbotron-fluid">
+    <h1>Forum Demo</h1>
+    <p class="lead">This is a demo of forum</p>
+
+    <hr />
+    @if (Request.IsAuthenticated && User.IsInRole("User")) {
+        <h3>Hi, User</h3>
+    } else if (Request.IsAuthenticated && User.IsInRole("Admin")) {
+        <h3>Hi, Admin</h3>
+    } else {
+        <h3>Hi, Vistor</h3>
+        <div>
+            訪問者請
+            <a class="btn btn-link" href="/member/login" role="button">登入</a>
+        </div>
+        <br />
+        <div>
+            沒有帳號??
+            <a class="btn btn-link" href="/member/register" role="button">Go Register</a>
+        </div>
+    }
+
 </div>
 
-<br />
-
 <div>
-@if (Request.IsAuthenticated && User.IsInRole("User")) {
-    <h4>Hi, User </h4>
+    @if (Request.IsAuthenticated && User.IsInRole("User")) {
 
-    <a class="btn btn-link" href="/Member/member-profile" role="button">你的檔案</a>
-    <a class="btn btn-link" href="Article/AddPosts" role="button">發表文章</a>
-    <a class="btn btn-link" href="Article/Posts" role="button">文章列表</a>
+        <a class="btn btn-link" href="/Member/member-profile" role="button">你的檔案</a>
+        <a class="btn btn-link" href="Article/AddPosts" role="button">發表文章</a>
+        <a class="btn btn-link" href="Article/Posts" role="button">文章列表</a>
 
-} else if (Request.IsAuthenticated && User.IsInRole("Admin")) {
-    <h4>Hi, Admin</h4>
+    } else if (Request.IsAuthenticated && User.IsInRole("Admin")) {
 
-    <a class="btn btn-link" href="/Member/member-profile" role="button">你的檔案</a>
-    <a class="btn btn-link" href="Article/AddPosts" role="button">發表文章</a>
-    <a class="btn btn-link" href="Article/Posts" role="button">文章列表</a>
+        <a class="btn btn-link" href="/Member/member-profile" role="button">你的檔案</a>
+        <a class="btn btn-link" href="Article/AddPosts" role="button">發表文章</a>
+        <a class="btn btn-link" href="Article/Posts" role="button">文章列表</a>
 
-} else {
-    <h4>Hello, This is a demo of Forum!!</h4>
-    <div>
-        訪問者請
-        <a class="btn btn-link" href="/member/login" role="button">登入</a>
-    </div>
-    <br />
-    <br />
-    <a class="btn btn-link" href="/member/register" role="button">Go Register</a>
-}
+    }
+
 </div>

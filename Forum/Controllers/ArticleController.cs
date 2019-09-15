@@ -1,4 +1,5 @@
 ﻿using Forum.Models.Data;
+using Forum.Models.Features;
 using Forum.Models.ViewModel.Article;
 using Forum.Models.ViewModel.Message;
 using PagedList;
@@ -143,14 +144,17 @@ namespace Forum.Controllers
         public ActionResult Post(int id)
         {
             ArticleVM model;
+            ArticleFeatures features = new ArticleFeatures();
 
             using(Db db = new Db()) {
                 ArticleDTO dto = db.Articles.Find(id);
+                
 
                 if(dto == null) {
                     return Content("Post isn't exist");
                 }
 
+                features.Watch(id);
                 model = new ArticleVM(dto);
             }
 

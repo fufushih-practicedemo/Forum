@@ -33,8 +33,9 @@ namespace Forum
             using(Db db = new Db()) {
                 // Populate roles
                 MemberDTO dto = db.Members.FirstOrDefault(x => x.Account == account);
-
-                roles = db.UserRoles.Where(x => x.UserId == dto.UID).Select(x => x.Role.Name).ToArray();
+                if(dto != null) {
+                    roles = db.UserRoles.Where(x => x.UserId == dto.UID).Select(x => x.Role.Name).ToArray();
+                }
             }
 
             // Build IPrinciple obj
